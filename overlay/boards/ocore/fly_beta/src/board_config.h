@@ -163,7 +163,6 @@
 		PX4_ADC_GPIO, \
 		GPIO_CAN1_TX, \
 		GPIO_CAN1_RX, \
-
 		GPIO_nLED_BLUE, \
 		GPIO_nLED_GREEN, \
 		GPIO_TONE_ALARM_IDLE, \
@@ -219,4 +218,5 @@ extern void board_peripheral_reset(int ms);
 #endif /* __ASSEMBLY__ */
 
 __END_DECLS
+
 

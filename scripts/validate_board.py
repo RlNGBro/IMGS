@@ -49,6 +49,8 @@ for item in [
 ]:
     assert item in nuttx, f"missing pin mapping: {item}"
 assert 'GPIO_UART7_RTS' not in nuttx, "UART7 RTS still conflicts with motor 5 on PE9"
+board_config = text(board / "src/board_config.h")
+assert "GPIO_CAN1_RX, \\\n\n" not in board_config, "PX4_GPIO_INIT_LIST macro was terminated by a blank line"
 assert 'GPIO_UART7_CTS' not in nuttx, "UART7 CTS still conflicts with BMI088 INT3 on PE10"
 nsh = text(board / "nuttx-config/nsh/defconfig")
 assert '# CONFIG_STM32H7_SPI4 is not set' in nsh
@@ -86,5 +88,6 @@ assert '"board_id": 1207' in prototype
 assert '#define BOARD_TYPE                     1207' in hw_config
 
 print("PX4 OCORE-FLY BETA overlay validation passed")
+
 
 
