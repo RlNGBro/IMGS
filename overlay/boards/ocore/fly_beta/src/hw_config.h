@@ -91,6 +91,7 @@
 #define INTERFACE_USB                  1
 #define INTERFACE_USB_CONFIG           "/dev/ttyACM0"
 /* No dedicated OTG_FS VBUS-sense GPIO on this board. */
+#define BOARD_USB_VBUS_SENSE_DISABLED
 
 //#define USE_VBUS_PULL_DOWN
 #define INTERFACE_USART                1
@@ -133,4 +134,5 @@
 #ifndef BOOT_DEVICES_FILTER_ONUSB
 #  define BOOT_DEVICES_FILTER_ONUSB USB0_DEV|SERIAL0_DEV|SERIAL1_DEV
 #endif
+
 
