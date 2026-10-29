@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 
 root = Path(sys.argv[1] if len(sys.argv) > 1 else "px4")
-board = root / "boards/ocore/fly-beta"
+board = root / "boards/ocore/fly_beta"
 driver = root / "src/drivers/imu/invensense/icm42607p"
 
 required = [
@@ -86,4 +86,5 @@ assert '"board_id": 1207' in prototype
 assert '#define BOARD_TYPE                     1207' in hw_config
 
 print("PX4 OCORE-FLY BETA overlay validation passed")
+
 
