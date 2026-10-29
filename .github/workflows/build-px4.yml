@@ -39,7 +39,7 @@ jobs:
           {
             set -x
             pwd
-            test -f overlay/boards/ocore/fly-beta/default.px4board
+            test -f overlay/boards/ocore/fly_beta/default.px4board
             cp -a overlay/. px4/
             python3 -u scripts/validate_board.py px4
           } 2>&1 | tee overlay-apply.log
@@ -131,5 +131,6 @@ jobs:
             git commit -m "CI diagnostics ${GITHUB_RUN_ID} [skip ci]"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
+
 
 
