@@ -107,6 +107,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           {
             echo "run_id=${GITHUB_RUN_ID}"
             echo "job_status=${{ job.status }}"
@@ -129,4 +131,5 @@ jobs:
             git commit -m "CI diagnostics ${GITHUB_RUN_ID} [skip ci]"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
+
 
