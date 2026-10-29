@@ -1,0 +1,6 @@
+menuconfig DRIVERS_IMU_INVENSENSE_ICM42607P
+	bool "icm42607p"
+	default n
+	---help---
+		Enable support for icm42607p
+

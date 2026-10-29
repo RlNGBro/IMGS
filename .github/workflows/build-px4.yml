@@ -1,0 +1,97 @@
+name: Build PX4 OCORE-FLY BETA
+
+on:
+  push:
+    branches: [codex/**]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    container:
+      image: ghcr.io/px4/px4-dev:v1.16.0-rc1-258-g0369abd556
+      options: --user root
+
+    steps:
+      - name: Check out board overlay
+        uses: actions/checkout@v4
+
+      - name: Check out PX4 v1.17.0
+        uses: actions/checkout@v4
+        with:
+          repository: PX4/PX4-Autopilot
+          ref: v1.17.0
+          path: px4
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Work around container git ownership
+        run: git config --system --add safe.directory '*'
+
+      - name: Apply board overlay
+        run: |
+          set -euo pipefail
+          cp -a overlay/. px4/
+          python3 scripts/validate_board.py px4
+
+      - name: Build application firmware
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd px4
+          make ocore_fly_beta_default 2>&1 | tee ../default-build.log
+
+      - name: Build PX4 bootloader
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd px4
+          make ocore_fly_beta_bootloader 2>&1 | tee ../bootloader-build.log
+
+      - name: Collect firmware and checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          cp px4/build/ocore_fly_beta_default/ocore_fly_beta_default.px4 artifacts/
+          cp px4/build/ocore_fly_beta_default/ocore_fly_beta_default.bin artifacts/
+          cp px4/build/ocore_fly_beta_default/ocore_fly_beta_default.elf artifacts/
+          cp px4/build/ocore_fly_beta_bootloader/ocore_fly_beta_bootloader.px4 artifacts/
+          cp px4/build/ocore_fly_beta_bootloader/ocore_fly_beta_bootloader.bin artifacts/
+          cp default-build.log bootloader-build.log artifacts/
+          {
+            echo "PX4_REF=v1.17.0"
+            echo "PX4_COMMIT=$(git -C px4 rev-parse HEAD)"
+            echo "OVERLAY_COMMIT=${GITHUB_SHA}"
+          } > artifacts/BUILD_INFO.txt
+          (cd artifacts && sha256sum *.px4 *.bin *.elf *.log BUILD_INFO.txt | sort -k2 > SHA256SUMS.txt)
+
+      - name: Upload PX4 artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: PX4_OCORE_FLY_BETA_${{ github.sha }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish firmware into branch
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p firmware/PX4_OCORE_FLY_BETA
+          cp -a artifacts/. firmware/PX4_OCORE_FLY_BETA/
+          git add firmware/PX4_OCORE_FLY_BETA
+          if git diff --cached --quiet; then
+            echo "No firmware changes to publish"
+          else
+            git commit -m "Build PX4 firmware ${GITHUB_SHA}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+

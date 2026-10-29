@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# OCORE-FLY BETA board specific extras init
+#------------------------------------------------------------------------------
+
+# SPI3: AT7456E OSD, chip select PD4
+atxxxx start -s

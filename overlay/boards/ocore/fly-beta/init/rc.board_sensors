@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# OCORE-FLY BETA board specific sensors init
+#------------------------------------------------------------------------------
+
+board_adc start
+
+# SPI1: ICM-42607-P at PA4, DRDY on PC4
+icm42607p -R 0 -b 1 -s start
+
+# SPI2: BMI088 accelerometer (PB12/PB2) and gyroscope (PE12/PE10)
+bmi088 -A -R 0 -s start
+bmi088 -G -R 0 -s start
+
+# I2C2: DPS310 at 0x76
+dps310 -I -b 2 -a 118 start
+
+# I2C1: IST8310
+ist8310 -X -b 1 -R 0 start
