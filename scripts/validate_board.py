@@ -86,8 +86,11 @@ prototype = text(board / "firmware.prototype")
 hw_config = text(board / "src/hw_config.h")
 assert '"board_id": 1207' in prototype
 assert '#define BOARD_TYPE                     1207' in hw_config
+init_c = text(board / "src/init.c")
+assert "int board_read_VBUS_state(void)" in init_c
 
 print("PX4 OCORE-FLY BETA overlay validation passed")
+
 
 
 

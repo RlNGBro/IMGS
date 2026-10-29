@@ -67,6 +67,17 @@ extern void led_off(int led);
 __END_DECLS
 
 /************************************************************************************
+ * Name: board_read_VBUS_state
+ *
+ * This PCB has no dedicated OTG_FS VBUS-sense GPIO. USB is self-powered by
+ * the cable, so report the interface as present for CDC-ACM startup/service.
+ ************************************************************************************/
+__EXPORT int board_read_VBUS_state(void)
+{
+	return 1;
+}
+
+/************************************************************************************
  * Name: board_peripheral_reset
  *
  * Description:
@@ -184,3 +195,4 @@ __EXPORT int board_app_initialize(uintptr_t arg)
 
 	return OK;
 }
+
