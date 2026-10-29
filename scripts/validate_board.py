@@ -87,10 +87,13 @@ hw_config = text(board / "src/hw_config.h")
 assert '"board_id": 1207' in prototype
 assert '#define BOARD_TYPE                     1207' in hw_config
 assert '#define BOARD_USB_VBUS_SENSE_DISABLED' in hw_config
+boot_main = text(root / "platforms/nuttx/src/bootloader/stm/stm32_common/main.c")
+assert '#if INTERFACE_USB && !defined(BOARD_USB_VBUS_SENSE_DISABLED)' in boot_main
 init_c = text(board / "src/init.c")
 assert "int board_read_VBUS_state(void)" in init_c
 
 print("PX4 OCORE-FLY BETA overlay validation passed")
+
 
 
 
