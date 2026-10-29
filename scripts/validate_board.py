@@ -91,8 +91,11 @@ boot_main = text(root / "platforms/nuttx/src/bootloader/stm/stm32_common/main.c"
 assert '#if INTERFACE_USB && !defined(BOARD_USB_VBUS_SENSE_DISABLED)' in boot_main
 init_c = text(board / "src/init.c")
 assert "int board_read_VBUS_state(void)" in init_c
+vbus_body = init_c.split("int board_read_VBUS_state(void)", 1)[1].split("}", 1)[0]
+assert "return 0;" in vbus_body, "VBUS placeholder must return 0 (connected convention)"
 
 print("PX4 OCORE-FLY BETA overlay validation passed")
+
 
 
 

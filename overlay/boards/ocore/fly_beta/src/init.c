@@ -74,7 +74,8 @@ __END_DECLS
  ************************************************************************************/
 __EXPORT int board_read_VBUS_state(void)
 {
-	return 1;
+	/* PX4 convention: zero means VBUS/connected. */
+	return 0;
 }
 
 /************************************************************************************
@@ -195,4 +196,5 @@ __EXPORT int board_app_initialize(uintptr_t arg)
 
 	return OK;
 }
+
 
