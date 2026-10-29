@@ -89,6 +89,7 @@ assert '#define BOARD_TYPE                     1207' in hw_config
 assert '#define BOARD_USB_VBUS_SENSE_DISABLED' in hw_config
 assert '#define APP_RESERVATION_SIZE (128 * 1024)' in hw_config
 assert '#define FLASH_BASED_PARAMS' in text(board / "src/board_config.h")
+assert '#include <parameters/flashparams/flashfs.h>' in text(board / "src/init.c")
 assert 'parameter_flashfs_init(params_sector_map' in text(board / "src/init.c")
 assert '{15, 128 * 1024, 0x081E0000}' in text(board / "src/init.c")
 assert 'LENGTH = 1792K' in text(board / "nuttx-config/scripts/script.ld")
@@ -100,6 +101,7 @@ vbus_body = init_c.split("int board_read_VBUS_state(void)", 1)[1].split("}", 1)[
 assert "return 0;" in vbus_body, "VBUS placeholder must return 0 (connected convention)"
 
 print("PX4 OCORE-FLY BETA overlay validation passed")
+
 
 
 

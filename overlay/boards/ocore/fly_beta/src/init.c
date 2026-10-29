@@ -60,6 +60,10 @@
 #include <px4_platform/gpio.h>
 #include <px4_platform/board_dma_alloc.h>
 
+#if defined(FLASH_BASED_PARAMS)
+#include <parameters/flashparams/flashfs.h>
+#endif
+
 __BEGIN_DECLS
 extern void led_init(void);
 extern void led_on(int led);
@@ -208,6 +212,7 @@ __EXPORT int board_app_initialize(uintptr_t arg)
 
 	return OK;
 }
+
 
 
 
