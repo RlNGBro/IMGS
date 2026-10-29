@@ -1,18 +1,15 @@
-run_id=40828087988
+run_id=40828451099
 job_status=failure
-head_sha=d9533a767fb365ebdfe3bc9bd8b99d57d8884cfa
+head_sha=42372e002c04046c11ce9520fdfcd96db4a47616
 ref=codex/px4-ocore-fly-beta
 
 == overlay-apply.log ==
 + pwd
 /__w/IMGS/IMGS
 + test -f overlay/boards/ocore/fly-beta/default.px4board
-+ cp -a overlay/. px4/
-+ python3 -u scripts/validate_board.py px4
-PX4 OCORE-FLY BETA overlay validation passed
 
 == default-build.log tail ==
-Makefile:553: *** "Make target ocore_fly_beta_default not found. It either does not exist or ocore_fly_beta_default cannot be the first argument. Use 'make list_config_targets' to get a list of all possible [configuration] targets.".  Stop.
+missing
 
 == bootloader-build.log tail ==
 missing
