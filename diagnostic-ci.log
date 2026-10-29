@@ -1,15 +1,136 @@
-run_id=40828451099
+run_id=40828726631
 job_status=failure
-head_sha=42372e002c04046c11ce9520fdfcd96db4a47616
+head_sha=348f62be41b6871cc9959ecf1d1a8a61fcb05e70
 ref=codex/px4-ocore-fly-beta
 
 == overlay-apply.log ==
 + pwd
 /__w/IMGS/IMGS
-+ test -f overlay/boards/ocore/fly-beta/default.px4board
++ test -f overlay/boards/ocore/fly_beta/default.px4board
++ cp -a overlay/. px4/
++ python3 -u scripts/validate_board.py px4
+PX4 OCORE-FLY BETA overlay validation passed
 
 == default-build.log tail ==
-missing
+-- PX4_GIT_TAG: v1.17.0
+CMake Warning (dev) at CMakeLists.txt:176 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.12.3", minimum required is "3") 
+-- PX4 config file: /__w/IMGS/IMGS/px4/boards/ocore/fly_beta/default.px4board
+-- PLATFORM nuttx
+-- TOOLCHAIN arm-none-eabi
+-- ARCHITECTURE cortex-m7
+-- ROMFSROOT px4fmu_common
+-- SERIAL_GPS1 /dev/ttyS1
+-- SERIAL_GPS2 /dev/ttyS2
+-- SERIAL_TEL1 /dev/ttyS3
+-- SERIAL_TEL2 /dev/ttyS4
+-- SERIAL_TEL3 /dev/ttyS5
+-- SERIAL_TEL4 /dev/ttyS6
+-- ROOT_PATH /fs/microsd
+-- PARAM_FILE /fs/mtd_params
+-- UAVCAN_INTERFACES 1
+-- PWM_FREQ 1000000
+-- PX4 config: ocore_fly_beta_default
+-- PX4 platform: nuttx
+-- The CXX compiler identification is GNU 13.2.1
+-- The C compiler identification is GNU 13.2.1
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/arm-none-eabi-gcc
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/arm-none-eabi-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/arm-none-eabi-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Enabling double FP precision hardware instructions
+-- cmake build type: MinSizeRel
+-- ccache enabled (export CCACHE_DISABLE=1 to disable)
+CMake Warning (dev) at src/drivers/uavcan/libdronecan/libuavcan/CMakeLists.txt:24 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found PythonInterp: /usr/bin/python3 (found version "3.12.3") 
+-- Release build type: MinSizeRel
+-- ROMFS: ROMFS/px4fmu_common
+-- ROMFS:  Adding platforms/nuttx/init/stm32h7/rc.board_arch_defaults -> /etc/init.d/rc.board_arch_defaults
+-- ROMFS:  Adding boards/ocore/fly_beta/init/rc.board_sensors -> /etc/init.d/rc.board_sensors
+-- ROMFS:  Adding boards/ocore/fly_beta/init/rc.board_extras -> /etc/init.d/rc.board_extras
+-- Found GDB: /usr/bin/gdb-multiarch
+-- Configuring done (4.7s)
+-- Generating done (0.3s)
+-- Build files have been written to: /__w/IMGS/IMGS/px4/build/ocore_fly_beta_default
+[1/1091] Generating git version header
+[2/1091] Generating output_functions.hpp
+[3/1091] Creating airframes.xml
+[4/1091] Generating Flight Tasks
+[4/1091] git submodule src/modules/uxrce_dds_client/Micro-XRCE-DDS-Client
+[5/1091] git submodule platforms/nuttx/NuttX/nuttx
+[6/1091] git submodule src/drivers/gps/devices
+[7/1091] PX4 UAVCAN dsdl compiler
+/__w/IMGS/IMGS/px4/src/drivers/uavcan/libdronecan/libuavcan/dsdl_compiler/libuavcan_dsdl_compiler/pyratemp.py:273: SyntaxWarning: invalid escape sequence '\#'
+  """Replace special characters by their escape sequence.
+[8/1091] git submodule src/drivers/uavcan/libdronecan/dsdl
+[10/1091] Running dsdl compiler
+/__w/IMGS/IMGS/px4/src/drivers/uavcan/libdronecan/libuavcan/dsdl_compiler/libuavcan_dsdl_compiler/pyratemp.py:273: SyntaxWarning: invalid escape sequence '\#'
+  """Replace special characters by their escape sequence.
+[14/1091] Generating px4 event header file
+[15/1091] git submodule src/drivers/uavcan/libdronecan/libuavcan/dsdl_compiler/pydronecan
+[17/1091] Generating ../romfs_files.tar
+[18/1091] git submodule src/modules/mavlink/mavlink
+[19/1091] Generating actuators.json
+[21/1091] Generating serial_params.c
+[22/1091] ROMFS: copying, generating airframes
+[23/1091] Generating Mavlink uAvionix: src/modules/mavlink/mavlink/message_definitions/v1.0/uAvionix.xml
+[24/1091] Generating Mavlink common: src/modules/mavlink/mavlink/message_definitions/v1.0/common.xml
+[25/1091] Generating parameters.xml
+[26/1091] Generating /__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/.config
+[27/1091] Generating px4_parameters.hpp
+[28/1091] Generating /__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/include/nuttx/config.h, /__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/include/arch/chip
+[29/1091] Building C object src/lib/crc/CMakeFiles/crc.dir/crc.c.obj
+[30/1091] Linking C static library src/lib/crc/libcrc.a
+[31/1091] Building CXX object src/lib/lat_lon_alt/CMakeFiles/lat_lon_alt.dir/lat_lon_alt.cpp.obj
+[32/1091] Linking CXX static library src/lib/lat_lon_alt/liblat_lon_alt.a
+[33/1091] Building CXX object src/lib/perf/CMakeFiles/perf.dir/perf_counter.cpp.obj
+[34/1091] Building CXX object src/lib/geo/CMakeFiles/geo.dir/geo.cpp.obj
+[35/1091] Linking CXX static library src/lib/perf/libperf.a
+[36/1091] Linking CXX static library src/lib/geo/libgeo.a
+[37/1091] Building C object src/lib/version/CMakeFiles/version.dir/version.c.obj
+FAILED: src/lib/version/CMakeFiles/version.dir/version.c.obj 
+/usr/bin/ccache /usr/bin/arm-none-eabi-gcc -DBUILD_URI=localhost -DCONFIG_ARCH_BOARD_OCORE_FLY_BETA -DPX4_BOARD_LABEL=\"default\" -DPX4_BOARD_NAME=\"OCORE_FLY_BETA\" -D_SYS_CDEFS_H_ -D_SYS_REENT_H_ -D__CUSTOM_FILE_IO__ -D__PX4_NUTTX -D__STDC_FORMAT_MACROS -I/__w/IMGS/IMGS/px4/boards/ocore/fly_beta/src -I/__w/IMGS/IMGS/px4/platforms/nuttx/src/px4/common/include -I/__w/IMGS/IMGS/px4/build/ocore_fly_beta_default -I/__w/IMGS/IMGS/px4/build/ocore_fly_beta_default/src/lib -I/__w/IMGS/IMGS/px4/platforms/nuttx/src/px4/stm/stm32h7/include -I/__w/IMGS/IMGS/px4/platforms/common -I/__w/IMGS/IMGS/px4/platforms/common/include -I/__w/IMGS/IMGS/px4/src -I/__w/IMGS/IMGS/px4/src/include -I/__w/IMGS/IMGS/px4/src/lib -I/__w/IMGS/IMGS/px4/src/lib/matrix -I/__w/IMGS/IMGS/px4/src/modules -I/__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/arch/arm/src/armv7-m -I/__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/arch/arm/src/chip -I/__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/arch/arm/src/common -I/__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/apps/include -I/__w/IMGS/IMGS/px4/build/ocore_fly_beta_default/external/Install/include -I/__w/IMGS/IMGS/px4/build/ocore_fly_beta_default/src/lib/version -isystem /__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/include/cxx -isystem /__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/include/cxx -isystem /__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/include -mcpu=cortex-m7 -mthumb -mfpu=fpv5-d16 -mfloat-abi=hard -Os -DNDEBUG -std=gnu11 -g -fdata-sections -ffunction-sections -fomit-frame-pointer -fmerge-all-constants -fno-signed-zeros -fno-trapping-math -freciprocal-math -fno-math-errno -fno-strict-aliasing -fvisibility=hidden -include visibility.h -Wall -Wextra -Werror -Warray-bounds -Wcast-align -Wdisabled-optimization -Wdouble-promotion -Wfatal-errors -Wfloat-equal -Wformat-security -Winit-self -Wlogical-op -Wpointer-arith -Wshadow -Wuninitialized -Wunknown-pragmas -Wunused-variable -Wno-missing-field-initializers -Wno-missing-include-dirs -Wno-unused-parameter -fdiagnostics-color=always -Wno-stringop-truncation -fno-builtin-printf -fno-strength-reduce -Wformat=1 -Wunused-but-set-variable -Wno-format-truncation -fno-common -Wnested-externs -Wstrict-prototypes -Wbad-function-cast -MD -MT src/lib/version/CMakeFiles/version.dir/version.c.obj -MF src/lib/version/CMakeFiles/version.dir/version.c.obj.d -o src/lib/version/CMakeFiles/version.dir/version.c.obj -c /__w/IMGS/IMGS/px4/src/lib/version/version.c
+In file included from /__w/IMGS/IMGS/px4/boards/ocore/fly_beta/src/board_config.h:50,
+                 from /__w/IMGS/IMGS/px4/platforms/common/include/px4_platform_common/px4_config.h:47,
+                 from /__w/IMGS/IMGS/px4/src/lib/version/version.h:45,
+                 from /__w/IMGS/IMGS/px4/src/lib/version/version.c:34:
+/__w/IMGS/IMGS/px4/platforms/nuttx/NuttX/nuttx/arch/arm/src/chip/stm32_gpio.h:78:40: error: expected identifier or '(' before numeric constant
+   78 | #  define GPIO_OUTPUT                 (1 << GPIO_MODE_SHIFT)     /* General purpose output mode */
+      |                                        ^
+/__w/IMGS/IMGS/px4/boards/ocore/fly_beta/src/board_config.h:61:45: note: in expansion of macro 'GPIO_OUTPUT'
+   61 | #define GPIO_nLED_BLUE          /* PE3 */  (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_50MHz|GPIO_OUTPUT_SET|GPIO_PORTE|GPIO_PIN3)
+      |                                             ^~~~~~~~~~~
+/__w/IMGS/IMGS/px4/boards/ocore/fly_beta/src/board_config.h:167:17: note: in expansion of macro 'GPIO_nLED_BLUE'
+  167 |                 GPIO_nLED_BLUE, \
+      |                 ^~~~~~~~~~~~~~
+compilation terminated due to -Wfatal-errors.
+[38/1091] Building CXX object src/lib/tinybson/CMakeFiles/tinybson.dir/tinybson.cpp.obj
+[39/1091] Building CXX object src/lib/world_magnetic_model/CMakeFiles/world_magnetic_model.dir/geo_mag_declination.cpp.obj
+[40/1091] Generating uORB topic sources
+[41/1091] Generating uORB topic ucdr headers
+[42/1091] Generating uORB compressed fields
+ninja: build stopped: subcommand failed.
+make: *** [Makefile:222: ocore_fly_beta_default] Error 1
 
 == bootloader-build.log tail ==
 missing
