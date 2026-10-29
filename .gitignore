@@ -3,4 +3,5 @@ px4/
 build/
 artifacts/
 *.log
+diagnostic-ci.log
 

@@ -33,10 +33,16 @@ jobs:
         run: git config --system --add safe.directory '*'
 
       - name: Apply board overlay
+        shell: bash
         run: |
           set -euo pipefail
-          cp -a overlay/. px4/
-          python3 scripts/validate_board.py px4
+          {
+            set -x
+            pwd
+            test -f overlay/boards/ocore/fly-beta/default.px4board
+            cp -a overlay/. px4/
+            python3 -u scripts/validate_board.py px4
+          } 2>&1 | tee overlay-apply.log
 
       - name: Build application firmware
         shell: bash
@@ -91,7 +97,35 @@ jobs:
           if git diff --cached --quiet; then
             echo "No firmware changes to publish"
           else
-            git commit -m "Build PX4 firmware ${GITHUB_SHA}"
+            git commit -m "Build PX4 firmware ${GITHUB_SHA} [skip ci]"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
+
+      - name: Publish CI diagnostics
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "run_id=${GITHUB_RUN_ID}"
+            echo "job_status=${{ job.status }}"
+            echo "head_sha=${GITHUB_SHA}"
+            echo "ref=${GITHUB_REF_NAME}"
+            echo
+            echo "== overlay-apply.log =="
+            if test -f overlay-apply.log; then cat overlay-apply.log; else echo "missing"; fi
+            echo
+            echo "== default-build.log tail =="
+            if test -f default-build.log; then tail -n 500 default-build.log; else echo "missing"; fi
+            echo
+            echo "== bootloader-build.log tail =="
+            if test -f bootloader-build.log; then tail -n 500 bootloader-build.log; else echo "missing"; fi
+          } > diagnostic-ci.log
+          git add diagnostic-ci.log
+          if git diff --cached --quiet; then
+            echo "No diagnostic changes"
+          else
+            git commit -m "CI diagnostics ${GITHUB_RUN_ID} [skip ci]"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
