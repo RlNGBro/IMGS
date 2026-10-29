@@ -98,6 +98,7 @@
 #define INTERFACE_USART_CONFIG         "/dev/ttyS0,57600"
 #define BOOT_DELAY_ADDRESS             0x000001a0
 #define BOARD_TYPE                     1207
+#define APP_RESERVATION_SIZE (128 * 1024)
 #define _FLASH_KBYTES                  (*(uint32_t *)0x1FF1E880)
 #define BOARD_FLASH_SECTORS            (15)
 #define BOARD_FLASH_SIZE               (_FLASH_KBYTES * 1024)
@@ -134,5 +135,7 @@
 #ifndef BOOT_DEVICES_FILTER_ONUSB
 #  define BOOT_DEVICES_FILTER_ONUSB USB0_DEV|SERIAL0_DEV|SERIAL1_DEV
 #endif
+
+
 
 

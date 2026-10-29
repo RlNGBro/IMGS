@@ -191,10 +191,23 @@ __EXPORT int board_app_initialize(uintptr_t arg)
 
 #endif
 
+#if defined(FLASH_BASED_PARAMS)
+	/* Reserve sector 15 (0x081E0000) for persistent parameters. */
+	static sector_descriptor_t params_sector_map[] = {
+		{15, 128 * 1024, 0x081E0000},
+		{0, 0, 0},
+	};
+
+	if (parameter_flashfs_init(params_sector_map, NULL, 0) != OK) {
+		syslog(LOG_ERR, "[boot] parameter_flashfs_init FAILED\n");
+		led_on(LED_BLUE);
+	}
+#endif
 	/* Configure the HW based on the manifest */
 	px4_platform_configure();
 
 	return OK;
 }
+
 
 

@@ -53,7 +53,7 @@
  * Definitions
  ****************************************************************************************************/
 
-// #define FLASH_BASED_PARAMS
+#define FLASH_BASED_PARAMS
 
 
 /* LEDs are driven with push open drain to support Anode to 5V or 3.3V */
@@ -218,5 +218,6 @@ extern void board_peripheral_reset(int ms);
 #endif /* __ASSEMBLY__ */
 
 __END_DECLS
+
 
 
